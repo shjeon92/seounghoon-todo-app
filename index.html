@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>할일</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="top">
+        <p class="eyebrow">할일</p>
+        <div class="month-nav">
+          <button type="button" id="prev-month">이전</button>
+          <h1 id="month-label"></h1>
+          <button type="button" id="next-month">다음</button>
+        </div>
+        <button type="button" id="today-btn">오늘</button>
+      </header>
+
+      <div class="layout">
+        <section class="calendar" aria-labelledby="month-label">
+          <div class="weekdays" aria-hidden="true">
+            <span>월</span>
+            <span>화</span>
+            <span>수</span>
+            <span>목</span>
+            <span>금</span>
+            <span>토</span>
+            <span>일</span>
+          </div>
+          <div id="calendar-grid" class="days"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="selected-label">
+          <div class="panel-head">
+            <h2 id="selected-label"></h2>
+            <p id="remaining" class="remaining"></p>
+          </div>
+
+          <form id="todo-form" class="todo-form">
+            <label class="field">
+              <span class="field-label">제목</span>
+              <input
+                id="todo-title"
+                type="text"
+                name="title"
+                maxlength="80"
+                placeholder="할일을 입력"
+                autocomplete="off"
+                required
+              >
+            </label>
+            <label class="field field-priority">
+              <span class="field-label">우선순위</span>
+              <select id="todo-priority" name="priority">
+                <option value="normal">일반</option>
+                <option value="important">중요</option>
+                <option value="urgent">긴급</option>
+              </select>
+            </label>
+            <div class="time-range">
+              <label class="field">
+                <span class="field-label">FROM</span>
+                <input id="todo-from" type="time" name="from" step="60">
+              </label>
+              <label class="field">
+                <span class="field-label">TO</span>
+                <input id="todo-to" type="time" name="to" step="60">
+              </label>
+            </div>
+            <p id="time-error" class="time-error" hidden></p>
+            <button type="submit" class="add-btn">추가</button>
+          </form>
+
+          <ul id="todo-list" class="todo-list"></ul>
+          <p id="empty-state" class="empty" hidden>이 날짜의 할일이 없습니다.</p>
+        </section>
+      </div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
