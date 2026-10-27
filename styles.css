@@ -50,13 +50,25 @@ button {
   margin-bottom: 40px;
 }
 
-.eyebrow {
+.brand {
   justify-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
   margin: 0;
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.42em;
   text-transform: uppercase;
+}
+
+.now-clock {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  font-variant-numeric: tabular-nums;
 }
 
 .month-nav {
@@ -252,6 +264,7 @@ select:focus-visible {
 
 .field input[type="time"] {
   color-scheme: dark;
+  cursor: pointer;
 }
 
 .field input[type="time"]::-webkit-calendar-picker-indicator {

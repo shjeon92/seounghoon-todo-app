@@ -13,6 +13,7 @@ const prioritySelect = document.querySelector("#todo-priority");
 const fromInput = document.querySelector("#todo-from");
 const toInput = document.querySelector("#todo-to");
 const timeError = document.querySelector("#time-error");
+const nowClock = document.querySelector("#now-clock");
 const todoList = document.querySelector("#todo-list");
 const emptyState = document.querySelector("#empty-state");
 
@@ -84,6 +85,25 @@ todoForm.addEventListener("submit", (event) => {
 fromInput.addEventListener("input", () => showTimeError(""));
 toInput.addEventListener("input", () => showTimeError(""));
 
+document.querySelectorAll(".time-range .field").forEach((field) => {
+  const input = field.querySelector('input[type="time"]');
+  field.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0 || typeof input.showPicker !== "function") return;
+    event.preventDefault();
+    try {
+      input.showPicker();
+    } catch {
+      // The picker is already open from this press.
+    }
+  });
+});
+
+renderNow();
+setTimeout(function tick() {
+  renderNow();
+  setTimeout(tick, 1000 - (Date.now() % 1000));
+}, 1000 - (Date.now() % 1000));
+
 prioritySelect.addEventListener("change", syncPrioritySelect);
 
 todoList.addEventListener("change", (event) => {
@@ -118,6 +138,15 @@ function shiftMonth(delta) {
 function render() {
   renderCalendar();
   renderTodos();
+}
+
+function renderNow() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, "0");
+  const minutes = String(now.getMinutes()).padStart(2, "0");
+  const seconds = String(now.getSeconds()).padStart(2, "0");
+  nowClock.textContent = `${hours}:${minutes}:${seconds}`;
+  nowClock.dateTime = now.toISOString();
 }
 
 function renderCalendar() {
